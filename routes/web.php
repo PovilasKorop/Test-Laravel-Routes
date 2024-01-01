@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,12 @@ Route::get('/', [HomeController::class, 'index']);
 // Put one code line here below
 //Route::get('/user/{id}', [UserController::class, 'show']);
 Route::get('/user/{id}', function (string $id) {
-    return 'User '.$id;
+    $user = User::where('name', $id)->first();
+    if (!$user) {
+        return view('users.notfound');
+    }
+
+    return view('users.show', compact('user'));
 });
 
 // Task 3: point the GET URL "/about" to the view

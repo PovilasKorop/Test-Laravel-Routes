@@ -24,20 +24,12 @@ Route::get('/', [HomeController::class, 'index']);
 // It doesn't use Route Model Binding, it expects $name as a parameter
 // Put one code line here below
 //Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/user/{id}', function (string $id) {
-    $user = User::where('name', $id)->first();
-    if (!$user) {
-        return view('users.notfound');
-    }
-
-    return view('users.show', compact('user'));
-});
 
 // Task 3: point the GET URL "/about" to the view
 // resources/views/pages/about.blade.php - without any controller
 // Also, assign the route name "about"
 // Put one code line here below
-Route::view('/about', 'about.blade')->name('about');
+Route::view('/about', 'resources/views/pages/about.blade')->name('about');
 
 // Task 4: redirect the GET URL "log-in" to a URL "login"
 // Put one code line here below
